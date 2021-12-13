@@ -1,6 +1,6 @@
 export class Service {
   constructor(
-    public id: string,
+    public id: number,
     public status: string,
     public description: string,
     public observations: string,
@@ -10,6 +10,4 @@ export class Service {
     public components: string,
   ) { }
 }
-
-
 

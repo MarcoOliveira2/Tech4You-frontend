@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ServiceService } from 'src/services/service.service';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +10,10 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Tech4You-frontend';
 
-  constructor() {
+  constructor(
+    private servicesService: ServiceService,
+    private modalService: NgbModal
+  ) {
 
   }
 }
