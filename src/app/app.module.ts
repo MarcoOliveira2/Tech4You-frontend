@@ -13,6 +13,9 @@ import { LoginComponent } from './login/login.component';
 import { PrincipalComponent } from './principal/principal.component';
 import { RmaSearchComponent } from './rma-search/rma-search.component'
 import { HttpClientModule } from '@angular/common/http';
+import { ServiceDetailsComponent } from './service-details/service-details.component';
+import { ServiceService } from 'src/services/service.service';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -28,14 +31,16 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     PrincipalComponent,
     RmaSearchComponent,
+    ServiceDetailsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [ServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
