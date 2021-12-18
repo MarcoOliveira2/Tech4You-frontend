@@ -7,6 +7,14 @@ import { Service } from 'src/modules/service.model';
 })
 export class ServiceService {
 
+  // async service(){
+  //   const resp = await fetch('http://localhost:3001/services/${id}');
+  //   const data = await resp.json();
+  //   const { results : [service] } = data;
+  //   return service; 
+  // }
+
+
 
   constructor(private httpClient: HttpClient) {
   }
@@ -16,7 +24,7 @@ export class ServiceService {
     return this.httpClient.get(url);
   }
 
-  convertSingleImage(id: number): Promise<any> {
+  convertSingleService(id: number): Promise<any> {
     let ServiceRes: Service;
     return new Promise((resolve, reject) => {
       this.getServiceByID(id).toPromise().then((data: any) => {
@@ -38,7 +46,7 @@ export class ServiceService {
           endDate,
           tests,
           components);
-          resolve({ service: ServiceRes });
+          resolve({ serviceData: ServiceRes });
       })   
     })
   }
