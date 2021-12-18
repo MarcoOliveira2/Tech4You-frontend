@@ -17,6 +17,7 @@ export class RmaSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
   }
   
   detail(query: string){
@@ -30,5 +31,7 @@ export class RmaSearchComponent implements OnInit {
   triggerModal(query: string) {
     this.modalService.open(query).result.then();
   }
+
+
 
 }

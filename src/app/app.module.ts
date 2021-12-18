@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ServiceDetailsComponent } from './service-details/service-details.component';
 import { ServiceService } from 'src/services/service.service';
 import { FormsModule } from '@angular/forms';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 
@@ -32,6 +33,7 @@ import { FormsModule } from '@angular/forms';
     PrincipalComponent,
     RmaSearchComponent,
     ServiceDetailsComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

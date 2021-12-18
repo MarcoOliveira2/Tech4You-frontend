@@ -10,24 +10,21 @@ import { ServiceService } from 'src/services/service.service';
 })
 export class ServiceDetailsComponent implements OnInit {
 
-  searchQuery :string ='';
-  Search: Service[] = [];
-  query!: string;
 
-  constructor(
-    public servicesService: ServiceService,
-    private activeRoute: ActivatedRoute,
-    private router: Router) {
-    this.router.events.subscribe((data: any) => {
-      let query = this.activeRoute.snapshot.params['search'];
-      if(query != this.searchQuery){
-        this.searchQuery = query;
-        this.servicesService.getServiceByID(query);
-      }
-    });
+  // s1: Service;
+
+  // service1: ServiceService;
+  // constructor( private activeRoute: ActivatedRoute, service: ServiceService ) {
+    // this.service1 = service;
+  // }
+
+  ngOnInit(): void { 
+    // this.activeRoute.params.subscribe((p) => {
+    //   debugger;
+    //   this.service1.convertSingleService(p.id).then((data : any) => {
+        
+    //   this.s1 = data.serviceData;
+    //   });
+    // });
   }
-
-  ngOnInit(): void {
-  }
-
 }
