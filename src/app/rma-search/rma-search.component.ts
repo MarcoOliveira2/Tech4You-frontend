@@ -8,22 +8,22 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./rma-search.component.css']
 })
 export class RmaSearchComponent implements OnInit {
-  search : string = '' ;
+  search: string = '';
   constructor(
-    private router:Router,
+    private router: Router,
     private modalService: NgbModal
-  ) { 
-    
+  ) {
+
   }
 
   ngOnInit(): void {
 
   }
-  
-  detail(query: string){
+
+  detail(query: string) {
     this.router.navigate(['/service-details', query]);
   }
-  
+
   modal(content: any) {
     this.modalService.open(content).result.then();
   }
