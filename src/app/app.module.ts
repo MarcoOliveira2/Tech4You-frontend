@@ -17,6 +17,10 @@ import { ServiceDetailsComponent } from './service-details/service-details.compo
 import { ServiceService } from 'src/services/service.service';
 import { FormsModule } from '@angular/forms';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { MenuComponent } from './technician/menu/menu.component';
+import { AdminNavbarComponent } from './technician/admin-navbar/admin-navbar.component';
+import { MenuTableComponent } from './menu-table/menu-table.component';
+
 
 
 
@@ -34,6 +38,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
     RmaSearchComponent,
     ServiceDetailsComponent,
     NotFoundComponent,
+    MenuComponent,
+    AdminNavbarComponent,
+    MenuTableComponent,
   ],
   imports: [
     BrowserModule,
