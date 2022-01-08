@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <body>
   <div class="principal">
     <div class="container" id="container">
@@ -8,7 +9,7 @@
           <input type="email" placeholder="Email" />
           <input type="password" placeholder="Password" />
           <a href="#">Esqueceu-se da palavra passe?</a>
-          <button href="#" class="button-class">Login</button>
+          <button href="#" class="button-class" (click)=login()>Login</button>
         </form>
       </div>
       <div class="overlay-container">

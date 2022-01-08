@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private http: HttpClient, private activatedRoute: ActivatedRoute) { }
+  constructor(private http: HttpClient, private activatedRoute: ActivatedRoute,    private router: Router,) { }
   baseUrl: string = `http://localhost:3001/`;
   jwtToken: string = "";
   ngOnInit(): void {
@@ -21,6 +22,10 @@ export class LoginComponent implements OnInit {
     // {
 
     // }
+  }
+
+  login() {
+    this.router.navigate(['/menu']);
   }
 
 }
