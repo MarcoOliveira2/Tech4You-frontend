@@ -14,9 +14,9 @@
           </tr>
         </thead>
 
-        
+
         <tbody>
-          <tr *ngFor="let data of data"  >
+          <tr *ngFor="let data of data">
             <input scope="row" id="serviceIdd" disabled name="serviceIdd" placeholder="{{ data?.id }}" #serviceIdd>
             <td>{{ data?.status }}</td>
             <td>{{ data?.description }}</td>
@@ -31,7 +31,7 @@
               <button type="button" class="btn btn-danger btn-sm px-3" (click)="delete(serviceIdd.placeholder)">
                 <i class="bi bi-trash"></i>
               </button>
-            </td> 
+            </td>
           </tr>
         </tbody>
       </table>
@@ -41,12 +41,11 @@
 
 
 
-<ng-template #content let-modal >
+<ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title" style="text-align: center;" id="modal-basic-title">Assitência - {{ clickData?.id }}</h4>
-    <button type="button" class="close buttonClose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
-      <p></p>
     </button>
   </div>
   <section id="hero" class="d-flex  flex-column justify-content-end align-items-center">
@@ -59,11 +58,12 @@
               <div class="row justify-content-between text-left">
                 <div class="form-group col-sm-6 flex-column d-flex">
                   <label class="form-control-label dropbtn px-3">Estado</label>
- 
+
 
                   <div class="col">
                     <div ngbDropdown class="d-inline-block">
-                      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{ clickData?.status }}</button>
+                      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{ clickData?.status
+                        }}</button>
                       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                         <button ngbDropdownItem>Ready</button>
                         <button ngbDropdownItem>Pending</button>
@@ -72,35 +72,36 @@
                     </div>
                   </div>
                 </div>
-  
+
                 <div class="form-group col-sm-6 flex-column d-flex">
                   <label class="form-control-label px-3">Descrição</label>
-                  <input type="text" id="description"  name="description" placeholder=" {{ clickData?.description }}">
+                  <input type="text" id="description" name="description" placeholder=" {{ clickData?.description }}">
                 </div>
               </div>
-  
+
               <div class="row justify-content-between text-left">
                 <div class="form-group col-sm-6 flex-column d-flex">
                   <label class="form-control-label px-3">Observações</label>
-                  <input type="text" id="observations"  name="observations" placeholder=" {{ clickData?.observations }}">
+                  <input type="text" id="observations" name="observations" placeholder=" {{ clickData?.observations }}">
                 </div>
                 <div class="form-group col-sm-6 flex-column d-flex">
                   <label class="form-control-label px-3">Testes Realizados</label>
-                  <input type="text" id="components"  name="components" placeholder="{{ clickData?.components }}">
+                  <input type="text" id="components" name="components" placeholder="{{ clickData?.components }}">
                 </div>
               </div>
               <div class="row justify-content-between text-left">
                 <div class="form-group col-sm-6 flex-column d-flex">
                   <label class="form-control-label px-3">Técnico responsável</label>
-                  <input type="text" id="technician_id"  name="technician_id" placeholder=" {{ clickData?.technician_id }}">
+                  <input type="text" id="technician_id" name="technician_id"
+                    placeholder=" {{ clickData?.technician_id }}">
                 </div>
                 <div class="form-group col-sm-6 flex-column d-flex">
                   <label class="form-control-label px-3">Referência do equipamento</label>
-                  <input type="text" id="equipment_id"  name="equipment_id" placeholder="{{ clickData?.equipment_id }}">
+                  <input type="text" id="equipment_id" name="equipment_id" placeholder="{{ clickData?.equipment_id }}">
                 </div>
               </div>
-  
-              
+
+
             </form>
           </div>
         </div>
@@ -113,13 +114,13 @@
                   <label class="form-control-label px-3">Nome</label>
                   <input type="text" id="nome" disabled name="nome" placeholder="{{ dataClient?.name }}">
                 </div>
-  
+
                 <div class="form-group col-sm-6 flex-column d-flex">
                   <label class="form-control-label px-3">Morada</label>
                   <input type="text" id="morada" disabled name="morada" placeholder="{{ dataClient?.address }}">
                 </div>
               </div>
-  
+
               <div class="row justify-content-between text-left">
                 <div class="form-group col-sm-6 flex-column d-flex">
                   <label class="form-control-label px-3">Data Nascimento</label>
@@ -128,10 +129,11 @@
                 </div>
                 <div class="form-group col-sm-6 flex-column d-flex">
                   <label class="form-control-label px-3">Telemóvel</label>
-                  <input type="text" id="telemovel" disabled name="telemovel" placeholder="{{ dataClient?.phoneNumber }}">
+                  <input type="text" id="telemovel" disabled name="telemovel"
+                    placeholder="{{ dataClient?.phoneNumber }}">
                 </div>
               </div>
-  
+
               <div class="row justify-content-between text-left">
                 <div class="form-group col-sm-6 flex-column d-flex">
                   <label class="form-control-label px-3">Email</label>
@@ -142,13 +144,13 @@
                   <input type="text" id="nif" disabled name="nif" placeholder="{{ dataClient?.nif }}">
                 </div>
               </div>
-  
-  
+
+
             </form>
           </div>
-  
+
         </div>
-  
+
         <div class="col-xl-6">
           <div class="card">
             <h3 class="text-center mb-4">Dados do Equipamento</h3>
@@ -159,13 +161,13 @@
                   <input type="text" id="tequipamento" disabled name="tequipamento"
                     placeholder="{{ dataEquipment?.typeEquipment }}">
                 </div>
-  
+
                 <div class="form-group col-sm-6 flex-column d-flex">
                   <label class="form-control-label px-3">Número Série</label>
                   <input type="text" id="nSerie" disabled name="nSerie" placeholder="{{ dataEquipment?.serialNumber }}">
                 </div>
               </div>
-  
+
               <div class="row justify-content-between text-left">
                 <div class="form-group col-sm-6 flex-column d-flex">
                   <label class="form-control-label px-3">Marca</label>
@@ -177,7 +179,7 @@
                     placeholder="{{ dataEquipment?.accessories }}">
                 </div>
               </div>
-  
+
               <div class="row justify-content-between text-left">
                 <div class="form-group col-sm-6 flex-column d-flex">
                   <label class="form-control-label px-3">Danos</label>
@@ -187,15 +189,15 @@
             </form>
           </div>
         </div>
-  
-        
+
+
       </div>
     </div>
   </section>
 
   <div class="modal-footer">
     <button type="button" class="btn btn-success" (click)="modal.close('Save click') " routerLink="">Confirmar</button>
-    <button type="button" class="btn btn-danger" (click)="modal.close('Save click') " >Cancelar</button>
+    <button type="button" class="btn btn-danger" (click)="modal.close('Save click') ">Cancelar</button>
 
   </div>
 </ng-template>

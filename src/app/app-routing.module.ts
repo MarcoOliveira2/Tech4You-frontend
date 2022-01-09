@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
+import { MenuClientesComponent } from './menu-clientes/menu-clientes.component';
+import { MenuEquipamentosComponent } from './menu-equipamentos/menu-equipamentos.component';
 import { MenuTableComponent } from './menu-table/menu-table.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PrincipalComponent } from './principal/principal.component';
@@ -15,6 +17,8 @@ const routes: Routes = [
   { path: 'service-details/:search', component: ServiceDetailsComponent },
   { path: 'menu', component: MenuComponent },
   { path: 'menu-table', component: MenuTableComponent },
+  { path: 'menu-clientes', component: MenuClientesComponent },
+  { path: 'menu-equipamentos', component: MenuEquipamentosComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: '**', redirectTo: 'not-found' }
 ];

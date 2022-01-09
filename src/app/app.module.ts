@@ -20,6 +20,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { MenuComponent } from './technician/menu/menu.component';
 import { AdminNavbarComponent } from './technician/admin-navbar/admin-navbar.component';
 import { MenuTableComponent } from './menu-table/menu-table.component';
+import { MenuClientesComponent } from './menu-clientes/menu-clientes.component';
+import { MenuEquipamentosComponent } from './menu-equipamentos/menu-equipamentos.component';
 
 
 
@@ -41,6 +43,8 @@ import { MenuTableComponent } from './menu-table/menu-table.component';
     MenuComponent,
     AdminNavbarComponent,
     MenuTableComponent,
+    MenuClientesComponent,
+    MenuEquipamentosComponent,
   ],
   imports: [
     BrowserModule,

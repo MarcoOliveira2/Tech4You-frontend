@@ -7,12 +7,8 @@
       </div>
       <nav id="navbar" class="navbar">
         <ul>
-          <!-- <li><a class="nav-link scrollto active" href="#hero">Início</a></li>
-          <li><a class="nav-link scrollto" href="#about">Sobre</a></li>
-          <li><a class="nav-link scrollto" href="#rma">Pesquisar RMA</a></li>
-          <li><a class="nav-link scrollto" href="#contact">Contactos</a></li> -->
-          <li><a class="nav-link scrollto" (click)="open(content)" >Logout</a></li>
-          
+          <li><a class="nav-link scrollto" (click)="open(content)">Logout</a></li>
+
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>
@@ -22,13 +18,14 @@
 
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" style="text-align: center;" id="modal-basic-title">Tem a certeza que pretende Sair?</h4>
+    <h4 class="modal-title" style="text-align: center;" id="modal-basic-title">Tem a certeza que pretende sair?</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-danger" (click)="modal.close('Save click') " routerLink="">Confirmar</button>
+    <button type="button" class="btn btn-outline-danger" (click)="modal.close('Save click') "
+      routerLink="">Confirmar</button>
   </div>
 </ng-template>
