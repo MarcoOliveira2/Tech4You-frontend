@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-menu-clientes',
@@ -17,6 +18,7 @@ export class MenuClientesComponent implements OnInit {
   clickData: any = '';
   deleteData: any = '';
 
+  alertMessage: string = "";
   serviceId: string = "";
   closeResult = '';
   search: number = 1;
@@ -61,6 +63,25 @@ export class MenuClientesComponent implements OnInit {
     this.http.delete(urlIndividual).subscribe((res2) => ((this.deleteData = res2), console.log(res2)));
     this.getRouteData();
   }
+
+  // //post
+  // edit = (msgForm: NgForm) => {
+  //   let apiURL = 'http://localhost:3001/public/services/9';
+  //   console.log(msgForm.value)
+  //   this.http
+  //     .put(`${apiURL}`, msgForm.value)
+  //     .subscribe((res) => this.getPosts(res, msgForm));
+  // };
+
+  // //
+  // getPosts = (param: any, formData: NgForm) => {
+  //   console.log(param.requestCode);
+  //   if (param.requestCode === 1) {
+  //     formData.reset();
+  //   } else {
+  //     this.alertMessage = param.msg;
+  //   }
+  // };
 
 
   private getDismissReason(reason: any): string {
