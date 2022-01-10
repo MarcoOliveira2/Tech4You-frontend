@@ -129,9 +129,12 @@
     </div>
   </div>
 </section>
-<form style="color: white;" #msgForm="ngForm" (ngSubmit)="sendMessage(msgForm)">
+<form style="color: black;" #msgForm="ngForm" (ngSubmit)="sendMessage(msgForm)">
+  <label for="fname">Id:</label><br>
+  <input type="text" name="id" #id ngModel><br>
+
   <label for="fname">status:</label><br>
-  <input type="text" name="status" #equipment_id ngModel><br>
+  <input type="text" name="status" #status ngModel><br>
 
   <label for="lname">description:</label><br>
   <input type="text" name="description" #description ngModel><br>

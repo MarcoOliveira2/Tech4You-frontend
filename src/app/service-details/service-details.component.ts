@@ -59,10 +59,10 @@ export class ServiceDetailsComponent implements OnInit {
 
   //post
   sendMessage = (msgForm: NgForm) => {
-    let apiURL = 'http://localhost:3001/public/services/';
+    let apiURL = 'http://localhost:3001/public/services/9';
     console.log(msgForm.value)
     this.http
-      .post(`${apiURL}`, msgForm.value)
+      .put(`${apiURL}`, msgForm.value)
       .subscribe((res) => this.getPosts(res, msgForm));
   };
 

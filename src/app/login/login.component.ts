@@ -1,7 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,23 +8,42 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  form: any = {
+    email: null,
+    password: null
+  };
+  isLoggedIn = false;
+  isLoginFailed = false;
+  errorMessage = '';
+  roles: string[] = [];
+  jwt: string = '';
 
-  constructor(private http: HttpClient, private activatedRoute: ActivatedRoute,    private router: Router,) { }
-  baseUrl: string = `http://localhost:3001/`;
-  jwtToken: string = "";
+  constructor(private authService: AuthService, private router: Router) { }
+
   ngOnInit(): void {
 
   }
 
-  onLogin(email: string, password: string) {
-    // return this.http.post(this.baseUrl + `/auth/signin`, { email, password })
-    // {
-
-    // }
+  onSubmit(): void {
+    const { email, password } = this.form;
+    debugger;
+    this.authService.login(email, password).subscribe(
+      data => {
+        this.jwt = data.token;
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+        this.reloadPage();
+      },
+      err => {
+        this.errorMessage = err.error.message;
+        this.isLoginFailed = true;
+      }
+    );
+    console.log(this.jwt);
   }
 
-  login() {
-    this.router.navigate(['/menu']);
+  reloadPage(): void {
+    // window.location.reload();
+    this.router.navigate(['menu'])
   }
-
 }
