@@ -12,7 +12,7 @@ import { RmaComponent } from './home-page/rma/rma.component';
 import { LoginComponent } from './login/login.component';
 import { PrincipalComponent } from './principal/principal.component';
 import { RmaSearchComponent } from './rma-search/rma-search.component'
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ServiceDetailsComponent } from './service-details/service-details.component';
 import { ServiceService } from 'src/services/service.service';
 import { FormsModule } from '@angular/forms';
@@ -22,6 +22,8 @@ import { AdminNavbarComponent } from './technician/admin-navbar/admin-navbar.com
 import { MenuTableComponent } from './menu-table/menu-table.component';
 import { MenuClientesComponent } from './menu-clientes/menu-clientes.component';
 import { MenuEquipamentosComponent } from './menu-equipamentos/menu-equipamentos.component';
+import { AuthService } from 'src/services/auth.service';
+import { AuthInterceptor } from 'src/helpers/auth.interceptors';
 
 
 
