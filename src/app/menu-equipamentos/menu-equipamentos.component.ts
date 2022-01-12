@@ -1,7 +1,10 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgForm } from '@angular/forms';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { TokenStorageService } from 'src/services/tokenStorage.service';
+
 @Component({
   selector: 'app-menu-equipamentos',
   templateUrl: './menu-equipamentos.component.html',
@@ -9,7 +12,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 })
 export class MenuEquipamentosComponent implements OnInit {
 
-  constructor(private http: HttpClient, private activatedRoute: ActivatedRoute, private router: Router, private modalService: NgbModal) { }
+  constructor(private http: HttpClient, private activatedRoute: ActivatedRoute, private router: Router, private modalService: NgbModal, private tokenStorage: TokenStorageService) { }
   baseUrl: string = `http://localhost:3001/`;
 
   data: any = '';
@@ -19,33 +22,36 @@ export class MenuEquipamentosComponent implements OnInit {
   serviceId: string = "";
   closeResult = '';
   search: number = 1;
-  serviceIdd: any = '';
+  id: any = ''
+  alertMessage: string = "";
+  token = this.tokenStorage.getUser();
+  
 
-
+  headers = { 'Authorization': `Bearer ${this.token.token}` };
+  requestOption = { headers: new HttpHeaders(this.headers) }
   ngOnInit() {
+   
+    console.log(this.requestOption);
     this.getRouteData();
+   
   }
 
   getRouteData() {
     this.activatedRoute.params.subscribe(params => {
       this.serviceId = params['search'];
-      console.log(params['search']);
     })
 
-    let url = this.baseUrl + `public/equipments`;
-    this.http.get(url).subscribe((res: any) => {
+    let url = this.baseUrl + `v1/equipments`;
+    this.http.get(url,this.requestOption).subscribe((res: any) => {
       this.data = res;
-      console.log(this.data)
     })
   }
 
 
-  open(content: any, serviceIdd: string) {
-    console.log(serviceIdd);
-    let url = this.baseUrl + `public/equipments/${serviceIdd}`;
-    this.http.get(url).subscribe((res: any) => {
+  open(content: any, id: string) {
+    let url = this.baseUrl + `v1/equipments/${id}`;
+    this.http.get(url,this.requestOption).subscribe((res: any) => {
       this.clickData = res;
-      console.log(this.clickData)
     })
 
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: 'lg' }).result.then((result) => {
@@ -55,9 +61,9 @@ export class MenuEquipamentosComponent implements OnInit {
     });
   }
 
-  delete(serviceIdd: string) {
-    let urlIndividual = this.baseUrl + `public/equipments/${serviceIdd}`;
-    this.http.delete(urlIndividual).subscribe((res2) => ((this.deleteData = res2), console.log(res2)));
+  delete(id: string) {
+    let urlIndividual = this.baseUrl + `v1/equipments/${id}`;
+    this.http.delete(urlIndividual,this.requestOption).subscribe((res2) => ((this.deleteData = res2)));
     this.getRouteData();
   }
 
@@ -71,5 +77,23 @@ export class MenuEquipamentosComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
+
+  sendMessage = (msgForm: NgForm,id: string) => {
+    console.log(this.id)
+    let apiURL =  this.baseUrl + `v1/equipments/${id}`;
+    console.log(this.requestOption);
+    this.http
+      .put( apiURL,msgForm.value, this.requestOption)
+      .subscribe((res) => this.getPosts(res, msgForm));
+  };
+
+  //
+  getPosts = (param: any, formData: NgForm) => {
+    if (param.requestCode === 1) {
+      formData.reset();
+    } else {
+      this.alertMessage = param.msg;
+    }
+  };
 
 }

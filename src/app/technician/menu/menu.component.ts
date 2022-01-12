@@ -23,21 +23,26 @@ export class MenuComponent implements OnInit {
   serviceId: string = "";
   baseUrl: string = `http://localhost:3001/`;
 
+  isLoggedIn = true;
+  isLoginFailed = false;
+
+  roles: string[] = [];
+
+
   token = this.tokenStorage.getUser();
-  httpOptions = {
-    headers: new HttpHeaders({ 'Authorization': `Bearer ${this.token}` })
-  };
 
   ngOnInit(): void {
+
     const headers = { 'Authorization': `Bearer ${this.token.token}` };
     const requestOptions = { headers: new HttpHeaders(headers) }
     let url = this.baseUrl + `v1/technicians/1126`;
-    console.log(this.token);
+
     this.http.get(url, requestOptions)
       .subscribe((res: any) => {
         this.data = res;
         console.log(this.data)
       })
+
   }
 
 

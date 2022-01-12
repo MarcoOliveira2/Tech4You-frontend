@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { TokenStorageService } from 'src/services/tokenStorage.service';
 
 @Component({
   selector: 'app-admin-navbar',
@@ -10,18 +11,20 @@ export class AdminNavbarComponent implements OnInit {
 
   closeResult = '';
 
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
   }
 
-
+  token = this.tokenStorage.getUser();
 
   open(content: any) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
+      this.token = this.tokenStorage.removeUser();
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+
     });
   }
 

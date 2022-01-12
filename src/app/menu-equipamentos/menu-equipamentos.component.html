@@ -46,10 +46,6 @@
 <ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title" style="text-align: center;" id="modal-basic-title">ID Equipamento - {{ clickData?.id }}</h4>
-    <button type="button" class="close buttonClose" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-      <p></p>
-    </button>
   </div>
   <section id="hero" class="d-flex  flex-column justify-content-end align-items-center">
     <div id="dados" class="container padding">
@@ -57,41 +53,51 @@
         <div class="col-xl-12">
           <div class="card">
             <h3 class="text-center mb-4">Dados do Equipamento</h3>
-            <form class="form-card">
+            <form class="form-card"  #msgForm="ngForm" (ngSubmit)="sendMessage(msgForm, id.value)">
               <div class="row justify-content-between text-left">
                 <div class="form-group col-sm-6 flex-column d-flex">
+                  <label class="form-control-label px-3">ID</label>
+                  <input type="text" id="id" name="id" value="{{ clickData?.id }}" placeholder="{{ clickData?.id }}" #id ngModel >
+                </div>
+                <div class="form-group col-sm-6 flex-column d-flex">
                   <label class="form-control-label px-3">Tipo Equipamento</label>
-                  <input type="text" id="typeEquipment" name="typeEquipment"
-                    placeholder="{{ clickData?.typeEquipment }}">
+                  <input type="text" id="typeEquipment" name="typeEquipment" #typeEquipment ngModel
+                  placeholder="{{ clickData?.typeEquipment }}">
                 </div>
 
-                <div class="form-group col-sm-6 flex-column d-flex">
-                  <label class="form-control-label px-3">Número Série</label>
-                  <input type="text" id="serialNumber" name="serialNumber" placeholder="{{ clickData?.serialNumber }}">
-                </div>
+               
               </div>
 
               <div class="row justify-content-between text-left">
                 <div class="form-group col-sm-6 flex-column d-flex">
+                  <label class="form-control-label px-3">Número Série</label>
+                  <input type="text" id="serialNumber" name="serialNumber"  #serialNumber ngModel 
+                  placeholder="{{ clickData?.serialNumber }}">
+                </div>
+                <div class="form-group col-sm-6 flex-column d-flex">
                   <label class="form-control-label px-3">Marca</label>
-                  <input type="text" id="brand" name="brand" placeholder="{{ clickData?.brand }}">
+                  <input type="text" id="brand" name="brand" #brand ngModel 
+                  placeholder="{{ clickData?.brand }}">
                 </div>
                 <div class="form-group col-sm-6 flex-column d-flex">
                   <label class="form-control-label px-3">Acessórios</label>
-                  <input type="text" id="accessories" name="accessories" placeholder="{{ clickData?.accessories }}">
+                  <input type="text" id="accessories" name="accessories"  #accessories ngModel placeholder="{{ clickData?.accessories }}">
+                </div>
+                <div class="form-group col-sm-6 flex-column d-flex">
+                  <label class="form-control-label px-3">Danos</label>
+                  <input type="text" id="damages" name="damages" placeholder="{{ clickData?.damages }}" #damages ngModel>
                 </div>
               </div>
 
               <div class="row justify-content-between text-left">
-                <div class="form-group col-sm-6 flex-column d-flex">
-                  <label class="form-control-label px-3">Danos</label>
-                  <input type="text" id="damages" name="damages" placeholder="{{ clickData?.damages }}">
-                </div>
+              
                 <div class="form-group col-sm-6 flex-column d-flex">
                   <label class="form-control-label px-3">Cliente</label>
-                  <input type="text" id="client_id" name="client_id" placeholder="{{ clickData?.client_id }}">
+                  <input type="text" id="client_id" name="client_id" placeholder="{{ clickData?.client_id }}" #client_id ngModel >
                 </div>
               </div>
+              <button type="submit" value="Submit" style="width: 100%; height:45px" class="btn btn-success">Editar</button>
+           
             </form>
           </div>
         </div>
@@ -102,7 +108,6 @@
   </section>
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-success" (click)="modal.close('Save click') " routerLink="">Confirmar</button>
     <button type="button" class="btn btn-danger" (click)="modal.close('Save click') ">Cancelar</button>
 
   </div>
