@@ -24,6 +24,9 @@ import { MenuClientesComponent } from './menu-clientes/menu-clientes.component';
 import { MenuEquipamentosComponent } from './menu-equipamentos/menu-equipamentos.component';
 import { AuthService } from 'src/services/auth.service';
 import { AuthInterceptor } from 'src/helpers/auth.interceptors';
+import { NgxPaginationModule } from 'ngx-pagination';
+
+
 
 
 
@@ -53,7 +56,8 @@ import { AuthInterceptor } from 'src/helpers/auth.interceptors';
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ],
   providers: [ServiceService],
   bootstrap: [AppComponent]

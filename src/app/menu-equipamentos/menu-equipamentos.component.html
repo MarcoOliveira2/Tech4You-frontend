@@ -18,7 +18,7 @@
 
 
         <tbody>
-          <tr *ngFor="let data of data">
+          <tr *ngFor="let data of data | paginate: { itemsPerPage: 10, currentPage: p }">
             <input scope="row" id="serviceIdd" disabled name="serviceIdd" placeholder="{{ data?.id }}" #serviceIdd>
             <td>{{ data?.typeEquipment }}</td>
             <td>{{ data?.serialNumber }}</td>
@@ -38,6 +38,9 @@
         </tbody>
       </table>
     </div>
+  </div>
+  <div>
+    <pagination-controls previousLabel="" nextLabel="" (pageChange)="p = $event"></pagination-controls>
   </div>
 </section>
 
@@ -105,6 +108,7 @@
 
       </div>
     </div>
+   
   </section>
 
   <div class="modal-footer">

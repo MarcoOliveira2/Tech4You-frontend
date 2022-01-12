@@ -3,6 +3,8 @@
 <section id="hero" class="d-flex  flex-column justify-content-end align-items-center">
   <div id="dados" class="container padding">
     <div class="row ">
+      <button (click)="open2(content2)" style="width: 100%; height:45px" class="btn btn-success">Adicionar</button>
+
       <table class="table align-middle table-hover">
         <thead>
           <tr>
@@ -18,7 +20,7 @@
 
 
         <tbody>
-          <tr *ngFor="let data of data">
+          <tr *ngFor="let data of data | paginate: { itemsPerPage: 10, currentPage: p }">
             <input scope="row" id="serviceIdd" disabled name="serviceIdd" placeholder="{{ data?.id }}" #serviceIdd>
             <td>{{ data?.status }}</td>
             <td>{{ data?.description }}</td>
@@ -38,6 +40,9 @@
         </tbody>
       </table>
     </div>
+  </div>
+  <div>
+    <pagination-controls previousLabel="" nextLabel="" (pageChange)="p = $event"></pagination-controls>
   </div>
 </section>
 
@@ -201,5 +206,104 @@
     <button type="button" class="btn btn-success" (click)="modal.close('Save click') " routerLink="">Confirmar</button>
     <button type="button" class="btn btn-danger" (click)="modal.close('Save click') ">Cancelar</button>
 
+  </div>
+</ng-template>
+
+<ng-template #content2 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" style="text-align: center;" id="modal-basic-title">Registar Assistência</h4>
+  </div>
+  <section id="hero" class="d-flex  flex-column justify-content-end align-items-center">
+    <div id="dados" class="container padding">
+      <div class="row ">
+        <div class="col-xl-12">
+          <div class="card">
+            <h3 class="text-center mb-4">Dados da Assistência</h3>
+            <form class="form-card" #msgForm="ngForm" (ngSubmit)="sendMessage(msgForm, content3)">
+              <div class="row justify-content-between text-left">
+
+                <!-- <div class="col">
+                    <div ngbDropdown class="d-inline-block">
+                      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{ clickData?.status
+                        }}</button>
+                      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button ngbDropdownItem>Ready</button>
+                        <button ngbDropdownItem>Pending</button>
+                        <button ngbDropdownItem>Cancelled</button>
+                      </div>
+                    </div>
+                  </div> -->
+
+                <div class="form-group col-sm-6 flex-column d-flex">
+                  <label class="form-control-label px-3">Estado (Ready / Pending / Cancelled)</label>
+                  <input type="text" id="status" name="status" #status ngModel placeholder="">
+                </div>
+                <div class="form-group col-sm-6 flex-column d-flex">
+                  <label class="form-control-label px-3">Descrição</label>
+                  <input type="text" id="description" name="description" placeholder="" #description ngModel>
+                </div>
+              </div>
+              <div class="row justify-content-between text-left">
+                <div class="form-group col-sm-6 flex-column d-flex">
+                  <label class="form-control-label px-3">Observações</label>
+                  <input type="text" id="observations" name="observations" #observations ngModel placeholder="">
+                </div>
+                <div class="form-group col-sm-6 flex-column d-flex">
+                  <label class="form-control-label px-3">Testes realizados</label>
+                  <input type="text" id="tests" name="tests" #tests ngModel placeholder="">
+                </div>
+                <div class="form-group col-sm-6 flex-column d-flex">
+                  <label class="form-control-label px-3">Componentes</label>
+                  <input type="text" id="components" name="components" #components ngModel placeholder="">
+                </div>
+                <div class="form-group col-sm-6 flex-column d-flex">
+                  <label class="form-control-label px-3">Referência do Equipamento</label>
+                  <input type="text" id="equipment_id" name="equipment_id" placeholder="" #equipment_id ngModel>
+                </div>
+                <div class="form-group col-sm-6 flex-column d-flex">
+                  <label class="form-control-label px-3">Técnico Responsável</label>
+                  <input type="text" id="technician_id" name="technician_id" placeholder="" #technician_id ngModel>
+                </div>
+                <div class="form-group col-sm-6 flex-column d-flex">
+                  <label class="form-control-label px-3">Data de Inicio</label>
+                  <input type="date"  id="startDate" name="startDate" #startDate ngModel>
+                </div>
+                <div class="form-group col-sm-6 flex-column d-flex">
+                  <label class="form-control-label px-3">Data estimada para finalização</label>
+                  <input type="date"  id="endDate" name="endDate" #endDate ngModel>
+                </div>
+              </div>
+              <!-- <input type="text" style="height: 0px;" value="2002-05-28T23:00:00.000Z" placeholder="2002-05-28T23:00:00.000Z" #startDate ngModel>
+              <input type="text" style="height: 0px;" value="2002-05-28T23:00:00.000Z" placeholder="2002-05-28T23:00:00.000Z" #endDate ngModel> -->
+                <button type="submit" value="Submit" style="width: 100%; height:45px"
+                class="btn btn-success">Confirmar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="modal.close('Save click') ">Cancelar</button>
+
+  </div>
+</ng-template>
+
+<ng-template #content3 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" style="text-align: center;" id="modal-basic-title">Error {{ errorStatus }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    
+  </div>
+  <div style="padding-left: 5px;">
+    <p>{{ errorMessage1 }}</p>    
+  </div>
+
+  <div class="modal-footer">
+    
+    <button type="button" class="btn btn-outline-danger" (click)="modal.close('Save click')">Confirmar</button>
   </div>
 </ng-template>

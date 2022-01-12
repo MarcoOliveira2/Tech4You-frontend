@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
@@ -20,9 +21,19 @@ export class MenuTableComponent implements OnInit {
   alertMessage: string = "";
   serviceId: string = "";
   baseUrl: string = `http://localhost:3001/`;
+
+  errorStatus: any = '';
+  errorMessage1: any = "";
+  errorMessage = '';
+  isLoggedIn = false;
+  isLoginFailed = false;
+
+
   clickData: any = '';
 
   closeResult = '';
+
+  p: number = 1;
 
   search: number = 1;
 
@@ -110,6 +121,54 @@ export class MenuTableComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
+  
+  open2(content2: any) {
+
+    this.modalService.open(content2, { ariaLabelledBy: 'modal-basic-title', size: 'lg' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+
+  sendMessage = (msgForm: NgForm, content3: any) => {
+    let apiURL =  this.baseUrl + `v1/services/`;
+    console.log(this.requestOption);
+    this.http
+      .post( apiURL, msgForm.value, this.requestOption)
+      .subscribe(
+        (res: any) => {
+          console.log(res);
+          if (res.requestCode === 1) {
+            msgForm.reset();
+    
+          } else {
+            this.alertMessage = res.msg;
+          }
+          
+        },
+        err => {
+        
+          this.modalService.open(content3, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+            this.closeResult = `Closed with: ${result}`;
+          }, (reason) => {
+            this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      
+          });
+          
+          this.errorMessage = err.error.message;
+          this.isLoginFailed = true;
+          this.errorMessage1=  err.error.error;
+          this.errorStatus = err.status;
+          console.log(err);
+          console.log(this.errorMessage1);
+          console.log(this.errorStatus);
+        }
+        
+      )
+      
+  };
 }
 
 
