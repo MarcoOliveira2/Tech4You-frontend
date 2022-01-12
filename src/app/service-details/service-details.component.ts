@@ -27,7 +27,7 @@ export class ServiceDetailsComponent implements OnInit {
       console.log(params['search']);
     })
 
-    let url = this.baseUrl + `public/services/${this.serviceId}`;
+    let url = this.baseUrl + `public/public/services/${this.serviceId}`;
 
     //remove - arranjar forma de passar o /{id} 
     // let url2 = 'http://localhost:3001/public/services/48';
@@ -38,12 +38,12 @@ export class ServiceDetailsComponent implements OnInit {
         this.data = res;
         console.log(this.data)
         this.http
-          .get(this.baseUrl + `public/equipments/${this.data.equipment_id}`)
+          .get(this.baseUrl + `public/public/equipments/${this.data.equipment_id}`)
           .subscribe((res: any) => {
             this.dataEquipment = res;
             console.log(res)
             this.http
-              .get(this.baseUrl + `public/clients/${this.dataEquipment.client_id}`)
+              .get(this.baseUrl + `public/public/clients/${this.dataEquipment.client_id}`)
               .subscribe((res: any) => {
                 this.dataClient = res;
                 console.log(res)
@@ -59,7 +59,7 @@ export class ServiceDetailsComponent implements OnInit {
 
   //post
   sendMessage = (msgForm: NgForm) => {
-    let apiURL = 'http://localhost:3001/public/services/9';
+    let apiURL = 'http://localhost:3001/public/public/services/9'; //TODO
     console.log(msgForm.value)
     this.http
       .put(`${apiURL}`, msgForm.value)

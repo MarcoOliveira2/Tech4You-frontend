@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+import { TokenStorageService } from 'src/services/tokenStorage.service';
 
 @Component({
   selector: 'app-menu-table',
@@ -11,7 +12,7 @@ import { connectableObservableDescriptor } from 'rxjs/internal/observable/Connec
 })
 export class MenuTableComponent implements OnInit {
 
-  constructor(private http: HttpClient, private activatedRoute: ActivatedRoute, private router: Router, private modalService: NgbModal) { }
+  constructor(private http: HttpClient, private activatedRoute: ActivatedRoute, private router: Router, private modalService: NgbModal,private tokenStorage: TokenStorageService) { }
   data: any = '';
   dataEquipment: any = '';
   dataClient: any = '';
@@ -27,6 +28,12 @@ export class MenuTableComponent implements OnInit {
 
   serviceIdd: any = '';
 
+  token = this.tokenStorage.getUser();
+  
+
+  headers = { 'Authorization': `Bearer ${this.token.token}` };
+  requestOption = { headers: new HttpHeaders(this.headers) }
+
 
   ngOnInit() {
 
@@ -39,17 +46,17 @@ export class MenuTableComponent implements OnInit {
       console.log(params['search']);
     })
 
-    let url = this.baseUrl + `public/services`;
-    this.http.get(url).subscribe((res: any) => {
+    let url = this.baseUrl + `v1/services`;
+    this.http.get(url, this.requestOption).subscribe((res: any) => {
       this.data = res;
       console.log(this.data)
       this.http
-        .get(this.baseUrl + `public/equipments`)
+        .get(this.baseUrl + `v1/equipments`, this.requestOption)
         .subscribe((res: any) => {
           this.dataEquipment = res;
           console.log(res)
           this.http
-            .get(this.baseUrl + `public/clients`)
+            .get(this.baseUrl + `v1/clients`, this.requestOption)
             .subscribe((res: any) => {
               this.dataClient = res;
               console.log(res)
@@ -62,17 +69,17 @@ export class MenuTableComponent implements OnInit {
   open(content: any, serviceIdd: string) {
     console.log(serviceIdd);
 
-    let url = this.baseUrl + `public/services/${serviceIdd}`;
-    this.http.get(url).subscribe((res: any) => {
+    let url = this.baseUrl + `v1/services/${serviceIdd}`;
+    this.http.get(url, this.requestOption).subscribe((res: any) => {
       this.clickData = res;
       console.log(this.clickData)
       this.http
-        .get(this.baseUrl + `public/equipments/${this.clickData.equipment_id}`)
+        .get(this.baseUrl + `v1/equipments/${this.clickData.equipment_id}`, this.requestOption)
         .subscribe((res: any) => {
           this.dataEquipment = res;
           console.log(res)
           this.http
-            .get(this.baseUrl + `public/clients/${this.dataEquipment.client_id}`)
+            .get(this.baseUrl + `v1/clients/${this.dataEquipment.client_id}`, this.requestOption)
             .subscribe((res: any) => {
               this.dataClient = res;
               console.log(res)
@@ -89,8 +96,8 @@ export class MenuTableComponent implements OnInit {
   }
 
   delete(serviceIdd: string) {
-    let url2 = this.baseUrl + `public/services/${serviceIdd}`;
-    this.http.delete(url2).subscribe((res2) => ((this.data2 = res2), console.log(res2)));
+    let url2 = this.baseUrl + `v1/services/${serviceIdd}`;
+    this.http.delete(url2, this.requestOption).subscribe((res2) => ((this.data2 = res2), console.log(res2)));
     this.getRouteData();
   }
 
