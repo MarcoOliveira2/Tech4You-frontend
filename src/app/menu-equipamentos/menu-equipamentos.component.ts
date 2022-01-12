@@ -95,5 +95,4 @@ export class MenuEquipamentosComponent implements OnInit {
       this.alertMessage = param.msg;
     }
   };
-
 }

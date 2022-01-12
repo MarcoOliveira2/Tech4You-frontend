@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   errorMessage1: any = '';
   userName= 'Pato';
 
-  constructor(private authService: AuthService, private router: Router, private tokenStorage: TokenStorageService,private modalService: NgbModal,) { }
+  constructor(private authService: AuthService, private router: Router, private tokenStorage: TokenStorageService,private modalService: NgbModal) { }
   //*ngIf="!isLoggedIn" estava no frontend
   ngOnInit(): void {
     if (this.tokenStorage.getUser()) {
