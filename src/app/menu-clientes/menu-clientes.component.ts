@@ -15,6 +15,8 @@ export class MenuClientesComponent implements OnInit {
   constructor(private http: HttpClient, private activatedRoute: ActivatedRoute, private router: Router, private modalService: NgbModal, private tokenStorage: TokenStorageService) { }
   baseUrl: string = `http://localhost:3001/`;
 
+  p: number = 1;
+  
   data: any = '';
   clickData: any = '';
   deleteData: any = '';
@@ -115,9 +117,10 @@ export class MenuClientesComponent implements OnInit {
       .post( apiURL, msgForm.value, this.requestOption)
       .subscribe(
         (res: any) => {
-          console.log(res.status);
+          console.log(res);
           if (res.requestCode === 1) {
             msgForm.reset();
+    
           } else {
             this.alertMessage = res.msg;
           }

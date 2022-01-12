@@ -26,6 +26,7 @@ export class MenuEquipamentosComponent implements OnInit {
   alertMessage: string = "";
   token = this.tokenStorage.getUser();
   
+  p: number = 1;
 
   headers = { 'Authorization': `Bearer ${this.token.token}` };
   requestOption = { headers: new HttpHeaders(this.headers) }

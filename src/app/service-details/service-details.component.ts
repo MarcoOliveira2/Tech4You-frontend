@@ -47,7 +47,8 @@ export class ServiceDetailsComponent implements OnInit {
               .subscribe((res: any) => {
                 this.dataClient = res;
                 console.log(res)
-              })
+              }
+              )
           })
       })
 

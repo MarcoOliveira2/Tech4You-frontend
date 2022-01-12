@@ -3,11 +3,7 @@
 <section id="hero" class="d-flex  flex-column justify-content-end align-items-center">
   <div id="dados" class="container padding">
     <div class="row ">
-
-      <button (click)="open2(content2)">Adicionar</button>
-
-
-
+      <button (click)="open2(content2)" style="width: 100%; height:45px" class="btn btn-success">Adicionar</button>
       <table class="table align-middle table-hover">
         <thead>
           <tr>
@@ -23,7 +19,7 @@
 
 
         <tbody>
-          <tr *ngFor="let data of data">
+          <tr *ngFor="let data of data | paginate: { itemsPerPage: 10, currentPage: p }">
             <input scope="row" id="serviceIdd" disabled name="serviceIdd" placeholder="{{ data?.id }}" #serviceIdd>
             <td>{{ data?.name }}</td>
             <td>{{ data?.address }}</td>
@@ -40,9 +36,16 @@
               </button>
             </td>
           </tr>
+
         </tbody>
+        
       </table>
+      
     </div>
+   
+  </div>
+  <div>
+    <pagination-controls previousLabel="" nextLabel="" (pageChange)="p = $event"></pagination-controls>
   </div>
 </section>
 
