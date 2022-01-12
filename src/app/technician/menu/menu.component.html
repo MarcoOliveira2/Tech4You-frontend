@@ -1,21 +1,28 @@
-<app-admin-navbar></app-admin-navbar>
-<section id="hero" class="d-flex  flex-column justify-content-end align-items-center">
-  <div id="dados" class="container padding">
-    <nav id="navbar" class="navbar">
-      <ul>
-        <!-- <li><a class="nav-link scrollto active" routerLink="menu-table" style="font-size: 18px;">Menu</a></li> -->
-        <li><a class="nav-link scrollto" routerLink="/menu-table" style="font-size: 18px;">Serviços</a></li>
-        <li><a class="nav-link scrollto" routerLink="/menu-clientes" style="font-size: 18px;">Clientes</a></li>
-        <li><a class="nav-link scrollto" routerLink="/menu-equipamentos" style="font-size: 18px;">Equipamentos</a></li>
-      </ul>
-      <i class="bi bi-list mobile-nav-toggle"></i>
-    </nav>
-  </div>
+<!-- <span *ngIf="isLoggedIn"> -->
+  <app-admin-navbar></app-admin-navbar>
+  <section id="hero" class="d-flex  flex-column justify-content-end align-items-center">
+    <div id="dados" class="container padding">
+      <nav id="navbar" class="navbar">
+        <ul>
+          <!-- <li><a class="nav-link scrollto active" routerLink="menu-table" style="font-size: 18px;">Menu</a></li> -->
+          <li><a class="nav-link scrollto" routerLink="/menu-table" style="font-size: 18px;">Serviços</a></li>
+          <li><a class="nav-link scrollto" routerLink="/menu-clientes" style="font-size: 18px;">Clientes</a></li>
+          <li><a class="nav-link scrollto" routerLink="/menu-equipamentos" style="font-size: 18px;">Equipamentos</a>
+          </li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav>
+    </div>
 
-</section>
-<p>{{ data?.id }}</p>
+  </section>
+  <p>{{ data?.id }}</p>
 
-<!-- <router-outlet></router-outlet> -->
-<!-- <app-menu-table></app-menu-table> -->
-<!-- <app-menu-clientes></app-menu-clientes> -->
-<!-- <app-menu-equipamentos></app-menu-equipamentos> -->
+  <!-- <div class="alert alert-success" role="alert">
+    A simple success alert—check it out!
+  </div> -->
+  <!-- </span> -->
+
+  <!-- <router-outlet></router-outlet> -->
+  <!-- <app-menu-table></app-menu-table> -->
+  <!-- <app-menu-clientes></app-menu-clientes> -->
+  <!-- <app-menu-equipamentos></app-menu-equipamentos> -->

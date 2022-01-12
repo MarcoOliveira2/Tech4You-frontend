@@ -35,4 +35,9 @@ export class TokenStorageService {
 
     return {};
   }
+
+
+  public removeUser() {
+    window.sessionStorage.removeItem(USER_KEY);
+  }
 }
