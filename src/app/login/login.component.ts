@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit {
 
   reloadPage(): void {
     // window.location.reload();
-    this.router.navigate(['menu'])
+    this.router.navigate(['menu-funcionarios'])
   }
 
  

@@ -153,7 +153,7 @@ export class MenuClientesComponent implements OnInit {
           } else {
             this.alertMessage = res.msg;
           }
-          
+          this.modalService.dismissAll(content3);
         },
         err => { 
           this.modalService.open(content3, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
@@ -188,7 +188,7 @@ export class MenuClientesComponent implements OnInit {
           } else {
             this.alertMessage = res.msg;
           }
-         
+          this.modalService.dismissAll(content3);
         },
         err => {
           this.modalService.open(content3, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
