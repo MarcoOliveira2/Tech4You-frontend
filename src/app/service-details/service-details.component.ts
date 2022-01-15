@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Service } from 'src/modules/service.model';
 import { ServiceService } from 'src/services/service.service';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-service-details',
@@ -11,8 +12,9 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./service-details.component.css']
 })
 export class ServiceDetailsComponent implements OnInit {
+  @ViewChild("content",{static:true}) content:any;
 
-  constructor(private http: HttpClient, private activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(private http: HttpClient, private activatedRoute: ActivatedRoute, private router: Router,private modalService: NgbModal) { }
   data: any = '';
   dataEquipment: any = '';
   dataClient: any = '';
@@ -20,19 +22,37 @@ export class ServiceDetailsComponent implements OnInit {
   alertMessage: string = "";
   serviceId: string = "";
   baseUrl: string = `http://localhost:3001/`;
-  ngOnInit() {
 
+  isLoggedIn = false;
+  isLoginFailed = false;
+  errorMessage = '';
+  closeResult = '';
+  errorStatus: any = '';
+  errorMessage1: any = '';
+ 
+  ngOnInit(){
     this.activatedRoute.params.subscribe(params => {
       this.serviceId = params['search'];
-      console.log(params['search']);
     })
+    this.getService(this.content);
+  }
 
+ 
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+
+    }
+  }
+
+
+  getService(content: any)
+  { 
     let url = this.baseUrl + `public/public/services/${this.serviceId}`;
-
-    //remove - arranjar forma de passar o /{id} 
-    // let url2 = 'http://localhost:3001/public/services/48';
-    // this.http.delete(url2).subscribe((res2) => ((this.data2 = res2), console.log(res2)));
-
     this.http.get(url)
       .subscribe((res: any) => {
         this.data = res;
@@ -47,16 +67,60 @@ export class ServiceDetailsComponent implements OnInit {
               .subscribe((res: any) => {
                 this.dataClient = res;
                 console.log(res)
-              }
-              )
+              },
+              err => {
+                this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+                  this.closeResult = `Closed with: ${result}`;
+                }, (reason) => {
+                  this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+            
+                });              
+                this.errorMessage = err.error.message;
+                this.isLoginFailed = true;
+                this.errorMessage1=  err.error.error;
+                this.errorStatus = err.status;
+                console.log(err);
+                console.log(this.errorMessage1);
+                console.log(this.errorStatus);
+              })
+          },err => {     
+            this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+              this.closeResult = `Closed with: ${result}`;
+            }, (reason) => {
+              this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        
+            });
+            
+            this.errorMessage = err.error.message;
+            this.isLoginFailed = true;
+            this.errorMessage1=  err.error.error;
+            this.errorStatus = err.status;
+            console.log(err);
+            console.log(this.errorMessage1);
+            console.log(this.errorStatus);
           })
+      },err => {
+        
+        this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+          this.closeResult = `Closed with: ${result}`;
+        }, (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    
+        });
+        
+        this.errorMessage = err.error.message;
+        this.isLoginFailed = true;
+        this.errorMessage1=  err.error.error;
+        this.errorStatus = err.status;
+        console.log(err);
+        console.log(this.errorMessage1);
+        console.log(this.errorStatus);
       })
-
   }
 
+  
 
   getRes = () => { };
-
 
   //post
   sendMessage = (msgForm: NgForm) => {
