@@ -27,10 +27,6 @@ import { AuthInterceptor } from 'src/helpers/auth.interceptors';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 
-
-
-
-
 @NgModule({
   declarations: [
     AppComponent,

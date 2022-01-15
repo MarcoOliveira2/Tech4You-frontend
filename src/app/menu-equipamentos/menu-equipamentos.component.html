@@ -3,6 +3,7 @@
 <section id="hero" class="d-flex  flex-column justify-content-end align-items-center">
   <div id="dados" class="container padding">
     <div class="row ">
+      <button (click)="open2(content2)" style="width: 100%; height:45px" class="btn btn-success">Adicionar</button>
       <table class="table align-middle table-hover">
         <thead>
           <tr>
@@ -25,12 +26,12 @@
             <td>{{ data?.brand }}</td>
             <td>{{ data?.client_id }}</td>
             <td>
-              <button type="button" (click)="open(content, serviceIdd.placeholder)">
+              <button type="button" (click)="open(content, serviceIdd.placeholder, content3)">
                 <i class="bi bi-pencil"></i>
               </button>
             </td>
             <td>
-              <button type="button" class="btn btn-danger btn-sm px-3" (click)="delete(serviceIdd.placeholder)">
+              <button type="button" class="btn btn-danger btn-sm px-3" (click)="delete(serviceIdd.placeholder, content3)">
                 <i class="bi bi-trash"></i>
               </button>
             </td>
@@ -45,6 +46,61 @@
 </section>
 
 
+<ng-template #content2 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" style="text-align: center;" id="modal-basic-title">Registar Cliente</h4>
+  </div>
+  <section id="hero" class="d-flex  flex-column justify-content-end align-items-center">
+    <div id="dados" class="container padding">
+      <div class="row ">
+        <div class="col-xl-12">
+          <div class="card">
+            <h3 class="text-center mb-4">Dados do Equipamento</h3>
+            <form class="form-card" #msgForm="ngForm" (ngSubmit)="sendMessage2(msgForm, content3)">
+              <div class="row justify-content-between text-left">
+                <div class="form-group col-sm-6 flex-column d-flex">
+                  <label class="form-control-label px-3">Tipo Equipamento</label>
+                  <input type="text" id="typeEquipment" name="typeEquipment" #typeEquipment ngModel placeholder="">
+                </div>
+                <div class="form-group col-sm-6 flex-column d-flex">
+                  <label class="form-control-label px-3">Número de Série</label>
+                  <input type="number" id="serialNumber" name="serialNumber" placeholder="" #serialNumber ngModel>
+                </div>
+              </div>
+              <div class="row justify-content-between text-left">
+                <div class="form-group col-sm-6 flex-column d-flex">
+                  <label class="form-control-label px-3">Marca</label>
+                  <input type="text" id="brand" name="brand" #brand ngModel placeholder="">
+                </div>
+                <div class="form-group col-sm-6 flex-column d-flex">
+                  <label class="form-control-label px-3">Acessórios</label>
+                  <input type="text" id="accessories" name="accessories" #accessories ngModel placeholder="">
+                </div>
+                <div class="form-group col-sm-6 flex-column d-flex">
+                  <label class="form-control-label px-3">Danos</label>
+                  <input type="text" id="damages" name="damages" #damages ngModel placeholder="">
+                </div>
+                <div class="form-group col-sm-6 flex-column d-flex">
+                  <label class="form-control-label px-3">ID Cliente</label>
+                  <input type="number" id="client_id" name="client_id" placeholder="" #client_id ngModel>
+                </div>
+              </div>
+              <button type="submit" value="Submit" style="width: 100%; height:45px"
+                class="btn btn-success">Confirmar</button>
+            </form>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </section>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="modal.close('Save click') ">Cancelar</button>
+
+  </div>
+</ng-template>
 
 <ng-template #content let-modal>
   <div class="modal-header">
@@ -56,7 +112,7 @@
         <div class="col-xl-12">
           <div class="card">
             <h3 class="text-center mb-4">Dados do Equipamento</h3>
-            <form class="form-card"  #msgForm="ngForm" (ngSubmit)="sendMessage(msgForm, id.value)">
+            <form class="form-card"  #msgForm="ngForm" (ngSubmit)="sendMessage(msgForm, id.value, content3)">
               <div class="row justify-content-between text-left">
                 <div class="form-group col-sm-6 flex-column d-flex">
                   <label class="form-control-label px-3">ID</label>
@@ -113,6 +169,23 @@
 
   <div class="modal-footer">
     <button type="button" class="btn btn-danger" (click)="modal.close('Save click') ">Cancelar</button>
+  </div>
+</ng-template>
 
+<ng-template #content3 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" style="text-align: center;" id="modal-basic-title">Error {{ errorStatus }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    
+  </div>
+  <div style="padding-left: 5px;">
+    <p>{{ errorMessage1 }}</p>    
+  </div>
+
+  <div class="modal-footer">
+    
+    <button type="button" class="btn btn-outline-danger" (click)="modal.close('Save click')">Confirmar</button>
   </div>
 </ng-template>

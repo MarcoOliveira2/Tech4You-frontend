@@ -129,37 +129,18 @@
     </div>
   </div>
 </section>
-<form style="color: black;" #msgForm="ngForm" (ngSubmit)="sendMessage(msgForm)">
-  <label for="fname">Id:</label><br>
-  <input type="text" name="id" #id ngModel><br>
 
-  <label for="fname">status:</label><br>
-  <input type="text" name="status" #status ngModel><br>
-
-  <label for="lname">description:</label><br>
-  <input type="text" name="description" #description ngModel><br>
-
-  <label for="lname">observations:</label><br>
-  <input type="text" name="observations" #observations ngModel><br>
-
-  <label for="lname">startDate:</label><br>
-  <input type="text" name="startDate" #startDate ngModel><br>
-
-  <label for="lname">endDate:</label><br>
-  <input type="text" name="endDate" #endDate ngModel><br>
-
-  <label for="lname">tests:</label><br>
-  <input type="text" name="tests" #tests ngModel><br>
-
-  <label for="lname">components:</label><br>
-  <input type="text" name="components" #components ngModel><br>
-
-  <label for="lname">technician_id:</label><br>
-  <input type="text" name="technician_id" #technician_id ngModel><br>
-
-  <label for="lname">equipment_id:</label><br>
-  <input type="text" name="equipment_id" #equipment_id ngModel><br>
-
-  <input type="submit" value="Submit">
-</form>
 <app-footer></app-footer>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" style="text-align: center;" id="modal-basic-title">Error {{ errorStatus }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    
+  </div>
+  <div style="padding-left: 5px;">
+    <p>{{ errorMessage1 }}</p>    
+  </div>
+</ng-template>
