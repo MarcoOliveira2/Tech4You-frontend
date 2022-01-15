@@ -1,16 +1,17 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { NgForm } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TokenStorageService } from 'src/services/tokenStorage.service';
 
 @Component({
-  selector: 'app-menu-equipamentos',
-  templateUrl: './menu-equipamentos.component.html',
-  styleUrls: ['./menu-equipamentos.component.css']
+  selector: 'app-menu-funcionarios',
+  templateUrl: './menu-funcionarios.component.html',
+  styleUrls: ['./menu-funcionarios.component.css']
 })
-export class MenuEquipamentosComponent implements OnInit {
+export class MenuFuncionariosComponent implements OnInit {
+
   @ViewChild("content3",{static:true}) content3:any;
   
   constructor(private http: HttpClient, private activatedRoute: ActivatedRoute, private router: Router, private modalService: NgbModal, private tokenStorage: TokenStorageService) { }
@@ -51,7 +52,7 @@ export class MenuEquipamentosComponent implements OnInit {
       this.serviceId = params['search'];
     })
 
-    let url = this.baseUrl + `v1/equipments`;
+    let url = this.baseUrl + `v1/technicians`;
     this.http.get(url,this.requestOption).subscribe((res: any) => {
       this.data = res;
     },err => {
@@ -74,7 +75,7 @@ export class MenuEquipamentosComponent implements OnInit {
   }
 
   open(content: any, id: string, content3: any) {
-    let url = this.baseUrl + `v1/equipments/${id}`;
+    let url = this.baseUrl + `v1/technicians/${id}`;
     this.http.get(url,this.requestOption).subscribe((res: any) => {
       this.clickData = res;
     },err => {
@@ -102,7 +103,7 @@ export class MenuEquipamentosComponent implements OnInit {
   }
 
   delete(id: string, content3: any) {
-    let urlIndividual = this.baseUrl + `v1/equipments/${id}`;
+    let urlIndividual = this.baseUrl + `v1/technicians/${id}`;
     this.http.delete(urlIndividual,this.requestOption).subscribe((res2) => {
       ((this.deleteData = res2))
       this.getRouteData(content3);
@@ -137,7 +138,7 @@ export class MenuEquipamentosComponent implements OnInit {
 
   sendMessage = (msgForm: NgForm,id: string, content3:any) => {
     console.log(this.id)
-    let apiURL =  this.baseUrl + `v1/equipments/${id}`;
+    let apiURL =  this.baseUrl + `v1/technicians/${id}`;
     console.log(this.requestOption);
     this.http
       .put( apiURL,msgForm.value, this.requestOption)
@@ -182,7 +183,7 @@ export class MenuEquipamentosComponent implements OnInit {
 
   sendMessage2 = (msgForm: NgForm, content3:any) => {
     console.log(this.id)
-    let apiURL =  this.baseUrl + `v1/equipments/`;
+    let apiURL =  this.baseUrl + `v1/technicians/`;
     console.log(this.requestOption);
     this.http
       .post( apiURL,msgForm.value, this.requestOption)

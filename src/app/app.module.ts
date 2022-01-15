@@ -25,6 +25,7 @@ import { MenuEquipamentosComponent } from './menu-equipamentos/menu-equipamentos
 import { AuthService } from 'src/services/auth.service';
 import { AuthInterceptor } from 'src/helpers/auth.interceptors';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MenuFuncionariosComponent } from './menu-funcionarios/menu-funcionarios.component';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MenuTableComponent,
     MenuClientesComponent,
     MenuEquipamentosComponent,
+    MenuFuncionariosComponent,
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { MenuClientesComponent } from './menu-clientes/menu-clientes.component';
 import { MenuEquipamentosComponent } from './menu-equipamentos/menu-equipamentos.component';
+import { MenuFuncionariosComponent } from './menu-funcionarios/menu-funcionarios.component';
 import { MenuTableComponent } from './menu-table/menu-table.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PrincipalComponent } from './principal/principal.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'rma-search', component: RmaSearchComponent },
   { path: 'service-details/:search', component: ServiceDetailsComponent },
   { path: 'menu', component: MenuComponent },
+  { path: 'menu-funcionarios', component: MenuFuncionariosComponent },
   { path: 'menu-table', component: MenuTableComponent },
   { path: 'menu-clientes', component: MenuClientesComponent },
   { path: 'menu-equipamentos', component: MenuEquipamentosComponent },

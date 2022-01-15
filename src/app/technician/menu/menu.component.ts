@@ -32,17 +32,15 @@ export class MenuComponent implements OnInit {
   token = this.tokenStorage.getUser();
 
   ngOnInit(): void {
+    // const headers = { 'Authorization': `Bearer ${this.token.token}` };
+    // const requestOptions = { headers: new HttpHeaders(headers) }
+    // let url = this.baseUrl + `v1/technicians/1126`;
 
-    const headers = { 'Authorization': `Bearer ${this.token.token}` };
-    const requestOptions = { headers: new HttpHeaders(headers) }
-    let url = this.baseUrl + `v1/technicians/1126`;
-
-    this.http.get(url, requestOptions)
-      .subscribe((res: any) => {
-        this.data = res;
-        console.log(this.data)
-      })
-
+    // this.http.get(url, requestOptions)
+    //   .subscribe((res: any) => {
+    //     this.data = res;
+    //     console.log(this.data)
+    //   })
   }
 
 
