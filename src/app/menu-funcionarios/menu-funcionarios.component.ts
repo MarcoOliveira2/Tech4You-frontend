@@ -183,7 +183,7 @@ export class MenuFuncionariosComponent implements OnInit {
 
   sendMessage2 = (msgForm: NgForm, content3:any) => {
     console.log(this.id)
-    let apiURL =  this.baseUrl + `v1/technicians/`;
+    let apiURL =  this.baseUrl + `auth/signup`;
     console.log(this.requestOption);
     this.http
       .post( apiURL,msgForm.value, this.requestOption)
