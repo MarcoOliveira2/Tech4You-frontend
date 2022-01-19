@@ -52,18 +52,18 @@ export class ServiceDetailsComponent implements OnInit {
 
   getService(content: any)
   { 
-    let url = this.baseUrl + `public/public/services/${this.serviceId}`;
+    let url = this.baseUrl + `public/publicServices/${this.serviceId}`;
     this.http.get(url)
       .subscribe((res: any) => {
         this.data = res;
         console.log(this.data)
         this.http
-          .get(this.baseUrl + `public/public/equipments/${this.data.equipment_id}`)
+          .get(this.baseUrl + `public/publicEquipamentos/${this.data.equipment_id}`)
           .subscribe((res: any) => {
             this.dataEquipment = res;
             console.log(res)
             this.http
-              .get(this.baseUrl + `public/public/clients/${this.dataEquipment.client_id}`)
+              .get(this.baseUrl + `public/publicClients/${this.dataEquipment.client_id}`)
               .subscribe((res: any) => {
                 this.dataClient = res;
                 console.log(res)
